@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { Pedido as PedidoModel, Item as ItemModel } from '../models/models';
+import { Item as ItemModel, Pedido as PedidoModel } from '../models/PedidoItemModels';
 import crypto from 'crypto';
 import Pedido from '../../../application/valueObjects/Pedido';
 
@@ -30,26 +30,39 @@ export class PedidoRepository {
     return pedido.addItem(item, { through: { quantidade } });
   }
 
-  static async atualizarStatus(pedido_id: string, status: string) {
-    return PedidoModel.update({ status: status }, { where: { id: pedido_id } });
+  static async atualizarStatus(id: string, status: string) {
+    return PedidoModel.update({ status: status }, { where: { id: id } });
   }
 
   static async buscarUltimos() {
-    return PedidoModel.findAll({
-      where: {
-        status: {
-          [Op.not]: 'Finalizado',
+    try {
+      return await PedidoModel.findAll({
+        where: {
+          status: {
+            [Op.not]: 'Finalizado',
+          },
         },
-      },
-      limit: 10,
-      order: [['data_pedido', 'DESC']],
-      include: [
-        {
-          model: ItemModel,
-          as: 'itens',
-          through: { attributes: ['quantidade'] },
-        },
-      ],
-    });
+        limit: 10,
+        order: [['data_pedido', 'DESC']],
+        include: [
+          {
+            model: ItemModel,
+            as: 'Itens',
+            through: { attributes: ['quantidade'] },
+          },
+        ],
+      });
+    } catch (error) {
+      console.error('Erro ao buscar os últimos pedidos:', error);
+    }
+  }
+
+  static async obterStatus(id: string): Promise<string | null> {
+    try {
+      const pedido = await PedidoModel.findByPk(id);
+      return pedido ? pedido.status : null;
+    } catch (error) {
+      throw new Error(`Erro ao buscar status do pedido: ${error}`);
+    }
   }
 }

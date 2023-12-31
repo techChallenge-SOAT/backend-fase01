@@ -40,8 +40,6 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-
-
 router.get('/cpf/:cpf', async (req: Request, res: Response) => {
   const cpf = req.params.cpf;
   try {

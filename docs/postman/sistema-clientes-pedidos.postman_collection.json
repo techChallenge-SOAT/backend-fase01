@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "43d83b54-abe1-46b9-98d7-c4e0467e54a9",
 		"name": "sistema-clientes-pedidos",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19858656"
 	},
 	"item": [
@@ -27,25 +27,34 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"cpf\": \"12345678900\",\n  \"nome\": \"João da Silva\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\"\n}",
+							"raw": "{\n    \"cpf\": \"12355677900\",\n    \"nome\": \"Antonio da Silva\",\n    \"email\": \"antonio@example.com\",\n    \"senha\": \"senha123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:3000/clientes"
+						"url": {
+							"raw": "localhost:3000/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clientes"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "clientes/{cpf}",
+					"name": "clientes/{id}",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"cpf\", \"12345678900\");"
+									"pm.environment.set(\"id\", \"12345678900\");"
 								],
 								"type": "text/javascript"
 							}
@@ -54,7 +63,48 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/clientes/{{cpf}}"
+						"url": {
+							"raw": "localhost:3000/clientes/{{id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clientes",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/cpf/{cpf}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"cpf\", \"111.222.333-00\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/clientes/cpf/{{cpf}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clientes",
+								"cpf",
+								"{{cpf}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -74,7 +124,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/clientes"
+						"url": {
+							"raw": "localhost:3000/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clientes"
+							]
+						}
 					},
 					"response": []
 				}
@@ -99,7 +158,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/clientes"
+						"url": {
+							"raw": "localhost:3000/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							]
+						}
 					},
 					"response": []
 				},
@@ -121,14 +189,23 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cliente_cpf\": \"12345678900\",\n    \"itens\": [\n      {\n        \"item_id\": 1,\n        \"quantidade\": 2\n      }\n    ]\n  }",
+							"raw": "{\n    \"cliente_cpf\": \"12345678900\",\n    \"itens\": [\n      {\n        \"item_id\": \"670d7b97-e82e-47f4-bb4a-cd3f05865c90\",\n        \"quantidade\": 2\n      }\n    ]\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:3000/pedidos"
+						"url": {
+							"raw": "localhost:3000/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							]
+						}
 					},
 					"response": []
 				},
@@ -157,7 +234,17 @@
 								}
 							}
 						},
-						"url": "localhost:3000/pedidos/{{id}}"
+						"url": {
+							"raw": "localhost:3000/pedidos/{{id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"{{id}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -177,7 +264,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/pedidos/{{id}}"
+						"url": {
+							"raw": "localhost:3000/pedidos/{{id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"{{id}}"
+							]
+						}
 					},
 					"response": []
 				}
@@ -202,7 +299,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/itens"
+						"url": {
+							"raw": "localhost:3000/itens",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"itens"
+							]
+						}
 					},
 					"response": []
 				},
@@ -231,7 +337,16 @@
 								}
 							}
 						},
-						"url": "localhost:3000/itens"
+						"url": {
+							"raw": "localhost:3000/itens",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"itens"
+							]
+						}
 					},
 					"response": []
 				},
@@ -251,7 +366,50 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/itens/{{id}}"
+						"url": {
+							"raw": "localhost:3000/itens/{{id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"itens",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "webhooks",
+			"item": [
+				{
+					"name": "webhooks/mercadopago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_pedido\": \"371a1359-37fe-468c-9f36-b2509fed34e7\",\n    \"status\": \"Pago\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/webhooks/mercadopago",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"webhooks",
+								"mercadopago"
+							]
+						}
 					},
 					"response": []
 				}

@@ -23,11 +23,11 @@ export class AdicionarClienteUseCase {
       const emailJaExiste = await this.emailExiste(email);
 
       if (cpfJaExiste) {
-        throw new Error('CPF já está cadastrado.');
+        throw new Error('CPF já cadastrado.');
       }
 
       if (emailJaExiste) {
-        throw new Error('Email já está cadastrado.');
+        throw new Error('Email já cadastrado.');
       }
 
       

@@ -1,8 +1,12 @@
 import Item from '../../valueObjects/Item';
 import { ItemRepository } from '../../../adapters/postgres/item/ItemRepository';
-import { v4 as uuidv4 } from 'uuid';
 
 export class CriarItemUseCase {
+  static async nomeExiste(nome:string) {
+    const nomeExistente = await ItemRepository.buscarPorNome(nome.trim());
+    return nomeExistente !== null;
+  }
+
   static async execute(
     categoria: string,
     nome: string,
@@ -10,6 +14,12 @@ export class CriarItemUseCase {
     preco_unitario: number,
     ) {
       try {
+        const nomeJaExiste = await this.nomeExiste(nome);
+
+        if(nomeJaExiste) {
+          throw new Error('Nome de item já cadastrado');
+        }
+
         const item = new Item(
           categoria,
           nome,

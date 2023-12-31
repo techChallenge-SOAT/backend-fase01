@@ -20,7 +20,7 @@ app.use('/itens', itemRoutes);
 
 app.use('/pedidos', pedidoRoutes);
 
-app.use('/webhook/mercadopago', handleMercadoPagoWebhook);
+app.use('/webhooks/mercadopago', handleMercadoPagoWebhook);
 
 app.get('/', (req, res) => {
   res.send('Sistema Clientes e Pedidos');

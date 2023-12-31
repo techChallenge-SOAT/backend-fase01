@@ -1,5 +1,5 @@
 import Item from '../../../application/valueObjects/Item';
-import { Item as ItemModel } from '../models/models';
+import { Item as ItemModel } from '../models/PedidoItemModels';
 
 export class ItemRepository {
   static async criar(item: Item) {
@@ -14,6 +14,10 @@ export class ItemRepository {
 
   static async buscarPorId(id: string) {
     return ItemModel.findByPk(id);
+  }
+
+  static async buscarPorNome(nome: string) {
+    return ItemModel.findOne({ where: { nome: nome}})
   }
 
   static async buscarTodos() {
